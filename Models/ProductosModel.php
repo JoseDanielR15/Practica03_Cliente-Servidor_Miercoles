@@ -31,4 +31,3 @@ function ObtenerProductosInicio()
 
     return $resultado;
 }
-?>

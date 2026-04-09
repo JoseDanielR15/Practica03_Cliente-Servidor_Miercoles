@@ -10,4 +10,3 @@ function ObtenerProductosHome()
 {
     return ObtenerProductosInicio();
 }
-?>
