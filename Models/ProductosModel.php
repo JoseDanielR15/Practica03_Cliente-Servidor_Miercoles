@@ -31,3 +31,39 @@ function ObtenerProductosInicio()
 
     return $resultado;
 }
+
+function ObtenerComprasPendientes()
+{
+    $conexion = OpenDatabase();
+    $resultado = mysqli_query($conexion, "CALL sp_ConsultarComprasPendientes()");
+    $datos = [];
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+        $datos[] = $fila;
+    }
+    CloseDatabase($conexion);
+    return $datos;
+}
+
+function ObtenerSaldoCompra($idCompra)
+{
+    $conexion = OpenDatabase();
+    $resultado = mysqli_query($conexion, "CALL sp_ConsultarSaldoCompra('$idCompra')");
+    $datos = null;
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+        $datos = $fila;
+    }
+    CloseDatabase($conexion);
+    return $datos;
+}
+
+function RegistrarAbono($idCompra, $monto)
+{
+    try {
+        $conexion = OpenDatabase();
+        $resultado = mysqli_query($conexion, "CALL sp_RegistrarAbono('$idCompra', '$monto')");
+        CloseDatabase($conexion);
+        return $resultado;
+    } catch (Exception $e) {
+        return false;
+    }
+}

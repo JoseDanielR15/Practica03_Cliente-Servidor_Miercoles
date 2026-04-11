@@ -14,7 +14,7 @@ function MostrarNavbar() {
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
 
-        <a class="navbar-brand fw-bold" href="/Practica03_Cliente-Servidor_Miercoles/Views/Home/inicio.php">
+        <a class="navbar-brand fw-bold" href="/Practica03_Cliente-Servidor_Miercoles/Views/vHome/inicio.php">
             Sistema de Abonos
         </a>
 

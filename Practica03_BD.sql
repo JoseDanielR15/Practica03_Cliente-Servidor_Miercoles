@@ -85,3 +85,47 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2026-04-09 10:19:56
+
+
+USE `practicas13`;
+
+-- 1. Consultar todas las compras ordenadas 
+DROP PROCEDURE IF EXISTS `sp_ConsultarCompras`;
+DELIMITER $$
+CREATE PROCEDURE `sp_ConsultarCompras`()
+BEGIN
+    SELECT * FROM principal
+    ORDER BY CASE WHEN Estado = 'Pendiente' THEN 1 ELSE 2 END;
+END$$
+DELIMITER ;
+
+-- 2. Consultar solo compras pendientes 
+DROP PROCEDURE IF EXISTS `sp_ConsultarComprasPendientes`;
+DELIMITER $$
+CREATE PROCEDURE `sp_ConsultarComprasPendientes`()
+BEGIN
+    SELECT * FROM principal WHERE Estado = 'Pendiente';
+END$$
+DELIMITER ;
+
+-- 3. Consultar saldo de una compra específica 
+DROP PROCEDURE IF EXISTS `sp_ConsultarSaldoCompra`;
+DELIMITER $$
+CREATE PROCEDURE `sp_ConsultarSaldoCompra`(IN p_IdCompra BIGINT)
+BEGIN
+    SELECT Saldo FROM principal WHERE Id_Compra = p_IdCompra;
+END$$
+DELIMITER ;
+
+-- 4. Registrar abono 
+DROP PROCEDURE IF EXISTS `sp_RegistrarAbono`;
+DELIMITER $$
+CREATE PROCEDURE `sp_RegistrarAbono`(IN p_IdCompra BIGINT, IN p_Monto DECIMAL(18,2))
+BEGIN
+    INSERT INTO abonos (Id_Compra, Monto, Fecha) VALUES (p_IdCompra, p_Monto, NOW());
+
+    UPDATE principal SET Saldo = Saldo - p_Monto WHERE Id_Compra = p_IdCompra;
+
+    UPDATE principal SET Estado = 'Cancelado' WHERE Id_Compra = p_IdCompra AND Saldo <= 0;
+END$$
+DELIMITER ;
