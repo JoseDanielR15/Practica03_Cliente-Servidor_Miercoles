@@ -46,8 +46,8 @@ if (isset($_POST["Mensaje"])) {
 
                 <!-- Saldo Anterior -->
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Saldo Anterior</label>
-                    <input type="text" id="SaldoAnterior" class="form-control" readonly
+                    <label class="form-label fw-bold text-muted">Saldo Anterior</label>
+                    <input type="text" id="SaldoAnterior" class="form-control bg-light rounded-0" readonly
                         placeholder="Se carga al seleccionar una compra">
                 </div>
 
@@ -75,7 +75,7 @@ if (isset($_POST["Mensaje"])) {
         let saldoActual = 0;
 
         // Ajax: carga el saldo al seleccionar una compra
-        $("#IdCompra").change(function () {
+        $("#IdCompra").change(function() {
             let idCompra = $(this).val();
 
             if (idCompra === "") {
@@ -87,17 +87,22 @@ if (isset($_POST["Mensaje"])) {
             $.ajax({
                 url: "/Practica03_Cliente-Servidor_Miercoles/Controllers/ProductosController.php",
                 type: "POST",
-                data: { IdCompra: idCompra, btnObtenerSaldo: true },
-                success: function (response) {
+                data: {
+                    IdCompra: idCompra,
+                    btnObtenerSaldo: true
+                },
+                success: function(response) {
                     let data = JSON.parse(response);
                     saldoActual = parseFloat(data.Saldo);
-                    $("#SaldoAnterior").val("₡" + parseFloat(data.Saldo).toLocaleString("es-CR", { minimumFractionDigits: 2 }));
+                    $("#SaldoAnterior").val("₡" + parseFloat(data.Saldo).toLocaleString("es-CR", {
+                        minimumFractionDigits: 2
+                    }));
                 }
             });
         });
 
         // Validación: abono no puede ser mayor al saldo
-        $("#formAbono").submit(function (e) {
+        $("#formAbono").submit(function(e) {
             let abono = parseFloat($("#Abono").val());
 
             if (abono > saldoActual) {
@@ -110,4 +115,5 @@ if (isset($_POST["Mensaje"])) {
     </script>
 
 </body>
+
 </html>
