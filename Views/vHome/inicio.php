@@ -11,9 +11,16 @@ $productos = ObtenerProductosHome();
 <?php MostrarHead(); ?>
 
 <body>
-
+    <!-- ===== MENSAJE DE BIENVENIDA ===== -->
     <?php MostrarNavbar(); ?>
-
+    <div class="container my-4">
+        <div class="p-4 bg-light rounded shadow-sm text-center">
+            <h4 class="fw-bold mb-2">¡Bienvenido al sistema de saldos!</h4>
+            <p class="text-muted mb-0">
+                Aquí podrás consultar, abonar y cancelar tus saldos pendientes respecto a nuestro catálogo de productos.
+            </p>
+        </div>
+    </div>
     <!-- ================= SLIDER ================= -->
     <div class="container d-flex justify-content-center my-4">
 
@@ -26,17 +33,17 @@ $productos = ObtenerProductosHome();
             </div>
 
             <!-- Imágenes -->
-			<div class="carousel-inner">
-				<div class="carousel-item active" data-bs-interval="3000">
-					<img src="../assets/images/Bannerspagina01.png" class="d-block w-100" alt="Banner Logitech">
-				</div>
-				<div class="carousel-item" data-bs-interval="3000">
-					<img src="../assets/images/Bannerspagina02.png" class="d-block w-100" alt="Banner Sony">
-				</div>
-				<div class="carousel-item" data-bs-interval="3000">
-					<img src="../assets/images/Bannerspagina03.png" class="d-block w-100" alt="Banner Nvidia">
-				</div>
-			</div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="3000">
+                    <img src="../assets/images/Bannerspagina01.png" class="d-block w-100" alt="Banner Logitech">
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <img src="../assets/images/Bannerspagina02.png" class="d-block w-100" alt="Banner Sony">
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <img src="../assets/images/Bannerspagina03.png" class="d-block w-100" alt="Banner Nvidia">
+                </div>
+            </div>
 
         </div>
     </div>
